@@ -10,5 +10,7 @@ class BindingDepen extends Bindings {
   // atua aklo ga masu masuin class bindingnya bsia juga kita masukin controllernya langsung
   void dependencies() {
     Get.lazyPut<CountControllerDepen>(() => CountControllerDepen());
+    Get.lazyPut<CountControllerDepen>(() => CountControllerDepen(), tag: 'count1');
+    Get.lazyPut<CountControllerDepen>(() => CountControllerDepen(), tag: 'count2');
   }
 }
