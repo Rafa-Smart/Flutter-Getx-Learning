@@ -8,7 +8,9 @@
 // Di belakang layar, GetX memiliki struktur data berupa Map<Type, Object> (Kamus).
 // Saat Get.put<LoginController>(LoginController()) dipanggil, GetX menulis: {'LoginController': Alamat_RAM_0x111}. Saat Get.find dipanggil, GetX sekadar mencari kunci tersebut di kamusnya.
 
+import 'package:belajar_flutter_get_x/dependencies_manajement/bindings/binding_depen.dart';
 import 'package:belajar_flutter_get_x/dependencies_manajement/controllers/count_controller_depen.dart';
+import 'package:belajar_flutter_get_x/dependencies_manajement/pages/count_depen_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,38 +24,58 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
+      // nanti aja lah ini mah untuk yang binding itu nanti aja pas materi binding
+      // initialBinding: BindingDepen(),
       home: Scaffold(
-        appBar: AppBar(title: Text('DEPENDENCIES MANAJEMENT')),
+        appBar: AppBar(title: Text('DEPENDENCIES MANAJEMENT'), centerTitle: true, actions: [
+          IconButton(onPressed: (){
+            Get.to(CountDepenPages());
+          }, icon: Icon(Icons.refresh))
+        ],),
         body: Center(
-          child: Column(
-            children: [
-              Obx(() => Text('count: ${myc.count}'),),
-              Obx(() => Text('nama: ${myc.nama}'),),
-              TextField(
-                onChanged: (value) {
-                  myc.nama.value = value;
-                },
-              ),
-              Row(
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      myc.increment();
-                    },
-                    child: Text('increment'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      myc.reset();
-                    },
-                    child: Text('reset name'),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          child: Text("HOME PAGE", style: TextStyle(fontSize: 25),),
         ),
       ),
     );
   }
 }
+
+
+
+// keren banget ada fitur getview
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'home_controller.dart';
+
+// // PERHATIKAN: Kita mengubah StatelessWidget menjadi GetView<HomeController>
+// class HomeView extends GetView<HomeController> {
+  
+//   const HomeView({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     // KITA TIDAK PERLU LAGI MENULIS Get.put() ATAU Get.find()!
+//     // GetView sudah otomatis menyediakan variabel bernama "controller" 
+//     // yang langsung terhubung ke RAM GetX. Kodenya sangat bersih!
+
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Arsitektur Bindings')),
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children:[
+//             Obx(() => Text(
+//               controller.judul.value, // Memanggil 'controller' bawaan GetView
+//               style: const TextStyle(fontSize: 20),
+//             )),
+//             ElevatedButton(
+//               onPressed: controller.ubahJudul,
+//               child: const Text('Ubah Judul'),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
