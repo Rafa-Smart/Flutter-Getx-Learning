@@ -72,6 +72,12 @@ class CountDepenPages extends StatelessWidget {
                   },
                   child: Text('increment 1'),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    controller2.increment();
+                  },
+                  child: Text('increment 2'),
+                ),
                 // ElevatedButton(
                 //   onPressed: () {
                 //     controller.reset();
