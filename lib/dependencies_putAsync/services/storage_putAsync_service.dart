@@ -15,17 +15,21 @@ class StoragePutAsyncService extends GetxService {
     return this;
   }
 
-final textC = TextEditingController();
+
+
+var textC = TextEditingController();
   void simpanNama(String nama){
     sharedPreferences.setString('nama', nama);
   }
 
   void resetNama(){
+    textC.clear();
     sharedPreferences.remove('nama');
   }
 
-  String ambilNama(){
-    return sharedPreferences.getString('nama') ?? "tidak ada nama";
+
+  void ambilNama(){
+    textC = (sharedPreferences.getString('nama') ?? "tidak ada nama") as TextEditingController;
   }
 }
 

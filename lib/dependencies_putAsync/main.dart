@@ -1,6 +1,4 @@
 import 'package:belajar_flutter_get_x/dependencies_putAsync/services/storage_putAsync_service.dart';
-import 'package:belajar_flutter_get_x/navigation/pages/page1.dart';
-import 'package:belajar_flutter_get_x/navigation/routes/route_class.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,8 +34,6 @@ void main() async {
 }
 
 class MyApp extends GetView<StoragePutAsyncService> {
-  
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -54,15 +50,19 @@ class MyApp extends GetView<StoragePutAsyncService> {
                 onSubmitted: (value) {
                   Get.find<StoragePutAsyncService>().simpanNama(value);
                 },
+                onChanged: (value) => {
+                  Get.find<StoragePutAsyncService>().simpanNama(value),
+                  controller.ambilNama(),
+                },
               ),
               ElevatedButton(
                 onPressed: () {
-                  Get.to(Page1());
+                  Get.find<StoragePutAsyncService>().resetNama();
                 },
-                child: Text('kirim'),
+                child: Text('reset'),
               ),
               Text(
-                "data dari storage : ${Get.find<StoragePutAsyncService>().ambilNama()}",
+                "data dari storage : ${Get.find<StoragePutAsyncService>().textC.text}",
               ),
             ],
           ),
