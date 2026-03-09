@@ -46,6 +46,8 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
             TextField(
               // https://chatgpt.com/c/69ae2cf8-62d4-8324-a7b3-7d65318cb46a
               // itu penjelasanya
+
+              // jadi intinya itu untuk ambil TextEditingController
               controller: controller.titleC..text = title,
               decoration: InputDecoration(hintText: "Masukan title todo"),
             ),
@@ -94,23 +96,16 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
                     children: [
                       IconButton(
                         onPressed: () {
-                          controller.updatePost(
+                          updateTodo(
                             id: state?[index].id ?? "",
-                            updateData:
-                                state?[index] ??
-                                TodoModelGetConnect(
-                                  userId: "",
-                                  id: "",
-                                  title: "",
-                                  completed: "",
-                                ),
+                            title: state?[index].title ?? "",
                           );
                         },
                         icon: Icon(Icons.edit),
                       ),
                       IconButton(
                         onPressed: () {
-                          controller.deletePost(id: state?[index].id ?? "");
+                          controller.removeTodo(id: state?[index].id ?? "");
                         },
                         icon: Icon(Icons.delete),
                       ),
