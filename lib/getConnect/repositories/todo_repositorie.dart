@@ -50,7 +50,7 @@ class TodoRepository extends GetConnect {
   }
 
 
-  Future<void> deletePost({required String id}) async {
+  Future deletePost({required String id}) async {
     final response = await delete('/posts/$id');
     if(response.status.hasError){
       return Future.error(response.statusText ?? "terjadi Kesalahan error");
