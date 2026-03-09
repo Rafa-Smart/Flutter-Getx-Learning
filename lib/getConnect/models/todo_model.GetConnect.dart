@@ -1,18 +1,20 @@
-class Todo {
+import 'package:belajar_flutter_get_x/getConnect/main.dart';
+
+class TodoModelGetConnect {
   String userId;
   String id;
   String title;
   String completed;
 
-  Todo({
+  TodoModelGetConnect({
     required this.userId,
     required this.id,
     required this.title,
     required this.completed,
   });
 
-  factory Todo.fromJson(Map<String, dynamic> json) {
-    return Todo(
+  factory TodoModelGetConnect.fromJson({required Map<String, dynamic> json}) {
+    return TodoModelGetConnect(
       userId: json['userId'],
       id: json['id'],
       title: json['title'],
@@ -22,5 +24,19 @@ class Todo {
 
   toJson() {
     return {'userId': userId, 'id': id, 'title': title, 'completed': completed};
+  }
+
+  TodoModelGetConnect copyWith({
+    String? userId,
+    String? id,
+    String? title,
+    String? completed,
+  }) {
+    return TodoModelGetConnect(
+      userId: userId ?? this.userId,
+      id: id ?? this.id,
+      title: title ?? this.title,
+      completed: completed ?? this.completed,
+    );
   }
 }
