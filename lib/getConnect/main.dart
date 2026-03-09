@@ -1,35 +1,19 @@
+import 'package:belajar_flutter_get_x/getConnect/binding/todo_getConnect_binding.dart';
+import 'package:belajar_flutter_get_x/getConnect/pages/Todo_get_page.dart';
+import 'package:belajar_flutter_get_x/getConnect/viewmodels/todo_viewmodel.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Todo {
-  final String id;
-  final String name;
-  final String title;
-  final String completed;
-
-  Todo({
-    required this.id,
-    required this.name,
-    required this.title,
-    required this.completed
-  });
-
-
-  factory Todo.fromJson(Map<String, dynamic> json){
-    return Todo(
-      id: json['id'].toString(),
-      name: json['name'].toString(),
-      title: json['title'].toString(),
-      completed: json['completed'].toString()
-    );
-  }
-
-  toJson(){
-    return {
-      "id":id,
-      "nama":name,
-      "title":title,
-      "competed":completed
-    };
-  }
+void main() {
+  Get.put(TodoViewModelGet());
+  runApp(MyApp());
 }
 
-
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      initialBinding: TodoGetconnectBinding(),
+      home: TodoGetPage());
+  }
+}

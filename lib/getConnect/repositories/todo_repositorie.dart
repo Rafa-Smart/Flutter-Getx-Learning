@@ -37,7 +37,7 @@ class TodoRepository extends GetConnect {
   }
 
   Future<TodoModelGetConnect> updatePost({
-    required String id,
+    required int id,
     required TodoModelGetConnect updateData,
   }) async {
     final response = await put('/posts/$id', updateData.toJson());
@@ -50,7 +50,7 @@ class TodoRepository extends GetConnect {
   }
 
 
-  Future deletePost({required String id}) async {
+  Future deletePost({required int id}) async {
     final response = await delete('/posts/$id');
     if(response.status.hasError){
       return Future.error(response.statusText ?? "terjadi Kesalahan error");

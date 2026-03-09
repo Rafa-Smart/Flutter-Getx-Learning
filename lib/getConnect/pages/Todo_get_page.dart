@@ -27,8 +27,8 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
         onConfirm: () {
           controller.addTodo(
             TodoModelGetConnect(
-              userId: "1",
-              id: "1",
+              userId: 1,
+              id: 1,
               title: controller.titleC.text,
               completed: "false",
             ),
@@ -38,7 +38,7 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
       );
     }
 
-    void updateTodo({required String id, required String title}) {
+    void updateTodo({required int id, required String title}) {
       Get.defaultDialog(
         title: "Update Todo",
         content: Column(
@@ -57,8 +57,8 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
           controller.updateTodo(
             id: id,
             updateData: TodoModelGetConnect(
-              userId: "1",
-              id: id,
+              userId: 1,
+              id: 1,
               title: controller.titleC.text,
               completed: "false",
             ),
@@ -78,7 +78,8 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
         },
         child: Icon(Icons.add),
       ),
-      body: controller.obx((state) {
+      body: controller.obx(
+        (state) {
         return Column(
           children: [
             // nah dinsi state itu adalah List<TodoModelGetConnect> jadi kita bisa langsung akses data yang ada di state ini karena state ini itu adalah data yang sudah kita ambil dari repositorynya
@@ -90,14 +91,14 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
                     state?[index].title ?? "tidak ada title",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text(state?[index].id ?? ""),
+                  subtitle: Text(state?[index].title ?? ""),
                   trailing: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
                         onPressed: () {
                           updateTodo(
-                            id: state?[index].id ?? "",
+                            id: state?[index].id ?? 1,
                             title: state?[index].title ?? "",
                           );
                         },
@@ -105,7 +106,7 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
                       ),
                       IconButton(
                         onPressed: () {
-                          controller.removeTodo(id: state?[index].id ?? "");
+                          controller.removeTodo(id: state?[index].id ?? 1);
                         },
                         icon: Icon(Icons.delete),
                       ),
@@ -116,7 +117,29 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
             ),
           ],
         );
-      }),
+
+        
+      },
+      onLoading: Center(child: CircularProgressIndicator()),
+      onEmpty: Center(child: Text("Data Kosong")),
+
+
+      onError: (error) => Center(child: Column(
+        children: [
+          Text(error ?? "Terjadi Kesalahan error"),
+          ElevatedButton(
+            onPressed: () {
+              controller.getAllTodo();
+            },
+            child: Text("Coba Lagi"),
+          ),
+        ],
+      )),
+      ),
+
+      
+      
     );
+  
   }
 }

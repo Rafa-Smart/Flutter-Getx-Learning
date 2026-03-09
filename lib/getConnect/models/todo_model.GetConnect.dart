@@ -1,8 +1,8 @@
 import 'package:belajar_flutter_get_x/getConnect/main.dart';
 
 class TodoModelGetConnect {
-  String userId;
-  String id;
+  int userId;
+  int id;
   String title;
   String completed;
 
@@ -27,8 +27,8 @@ class TodoModelGetConnect {
   }
 
   TodoModelGetConnect copyWith({
-    String? userId,
-    String? id,
+    int? userId,
+    int? id,
     String? title,
     String? completed,
   }) {

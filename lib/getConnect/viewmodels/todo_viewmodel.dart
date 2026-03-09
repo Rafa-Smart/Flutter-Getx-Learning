@@ -83,7 +83,7 @@ class TodoViewModelGet extends GetxController
     }
   }
 
-  void removeTodo({required String id}) async {
+  void removeTodo({required int id}) async {
     try {
       bool response = await repository.deletePost(id: id);
       if (response) {
@@ -104,7 +104,7 @@ class TodoViewModelGet extends GetxController
   }
 
   void updateTodo({
-    required String id,
+    required int id,
     required TodoModelGetConnect updateData,
   }) async {
     try {
