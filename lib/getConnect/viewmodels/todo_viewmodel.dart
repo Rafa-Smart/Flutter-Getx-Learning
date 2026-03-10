@@ -15,7 +15,9 @@ class TodoViewModelGet extends GetxController
   @override
   void onInit() {
     super.onInit();
+    getAllTodo();
   }
+  
 
   // disin ktia itu bukan return karena ketika kita menggunakan state mixin maka otomatis saya akna punya
   // sebuah state, jadi dnegnafungis fungsi ini itu kita akn mengganti state yang ada di state mixin ini, makanya kita ga perlu return tapi hany ubah aja (void)
@@ -76,6 +78,7 @@ class TodoViewModelGet extends GetxController
       change([...currentValue, newTodo], status: RxStatus.success());
 
       // nah dinsi kita tampikan snackbar
+      titleC.clear();
 
       Get.snackbar("Success", 'Berhasil menambah Todo ID: ${newTodo.id}');
     } catch (error) {
@@ -125,8 +128,17 @@ class TodoViewModelGet extends GetxController
           Get.snackbar("Success", 'Berhasil mengubah Todo ID: $id');
         }
 
+        titleC.clear();
+        
+
     } catch (error) {
       change(null, status: RxStatus.error(error.toString()));
     }
+  }
+
+  @override
+  void onClose() {
+    titleC.dispose();
+    super.onClose();
   }
 }

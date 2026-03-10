@@ -30,7 +30,7 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
               userId: 1,
               id: 1,
               title: controller.titleC.text,
-              completed: "false",
+              completed: false,
             ),
           );
           Get.back();
@@ -60,7 +60,7 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
               userId: 1,
               id: 1,
               title: controller.titleC.text,
-              completed: "false",
+              completed: false,
             ),
           );
           Get.back();
@@ -83,37 +83,39 @@ class TodoGetPage extends GetView<TodoViewModelGet> {
         return Column(
           children: [
             // nah dinsi state itu adalah List<TodoModelGetConnect> jadi kita bisa langsung akses data yang ada di state ini karena state ini itu adalah data yang sudah kita ambil dari repositorynya
-            ListView.builder(
-              itemCount: state?.length ?? 0,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(
-                    state?[index].title ?? "tidak ada title",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(state?[index].title ?? ""),
-                  trailing: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          updateTodo(
-                            id: state?[index].id ?? 1,
-                            title: state?[index].title ?? "",
-                          );
-                        },
-                        icon: Icon(Icons.edit),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          controller.removeTodo(id: state?[index].id ?? 1);
-                        },
-                        icon: Icon(Icons.delete),
-                      ),
-                    ],
-                  ),
-                );
-              },
+            Expanded(
+              child: ListView.builder(
+                itemCount: state?.length ?? 0,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      state?[index].title ?? "tidak ada title",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text("ID: ${state?[index].id}"),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            updateTodo(
+                              id: state?[index].id ?? 1,
+                              title: state?[index].title ?? "",
+                            );
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            controller.removeTodo(id: state?[index].id ?? 1);
+                          },
+                          icon: Icon(Icons.delete),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         );

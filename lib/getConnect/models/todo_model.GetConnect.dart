@@ -4,7 +4,7 @@ class TodoModelGetConnect {
   int userId;
   int id;
   String title;
-  String completed;
+  bool completed;
 
   TodoModelGetConnect({
     required this.userId,
@@ -15,14 +15,14 @@ class TodoModelGetConnect {
 
   factory TodoModelGetConnect.fromJson({required Map<String, dynamic> json}) {
     return TodoModelGetConnect(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-      completed: json['completed'],
+      userId: json['userId'] ?? 0,
+      id: json['id'] ?? 0,
+      title: json['title'] ?? "",
+      completed: json['completed'] ?? false,
     );
   }
 
-  toJson() {
+  Map<String, dynamic> toJson() {
     return {'userId': userId, 'id': id, 'title': title, 'completed': completed};
   }
 
@@ -30,7 +30,7 @@ class TodoModelGetConnect {
     int? userId,
     int? id,
     String? title,
-    String? completed,
+    bool? completed,
   }) {
     return TodoModelGetConnect(
       userId: userId ?? this.userId,
